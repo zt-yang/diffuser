@@ -22,7 +22,30 @@ Load a pretrained diffusion model and sample from it in your browser with [scrip
 
 ## Installation
 
+First install [Mujoco binaries 200](https://www.roboti.us/download.html) and [license](https://www.roboti.us/license.html)
+
+```shell
+mkdir ~/.mujoco
+unzip ~/Downloads/mujoco200_linux.zip -d ~/.mujoco/
+mv ~/.mujoco/mujoco200_linux ~/.mujoco/mujoco200
+mv ~/Downloads/mjkey.txt ~/.mujoco/mjkey.txt
 ```
+
+add path to bashrc or zshrc
+```shell
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/yang/.mujoco/mujoco200/bin
+```
+
+some dependencies for mujoco, otherwise there will be `fatal error: GL/osmesa.h: No such file or directory`
+
+```shell
+sudo apt install libosmesa6-dev libgl1-mesa-glx libglfw3
+```
+
+finally create conda env
+
+```shell
+## conda remove -n diffuser --all  ## if conda failed during the process
 conda env create -f environment.yml
 conda activate diffuser
 pip install -e .
